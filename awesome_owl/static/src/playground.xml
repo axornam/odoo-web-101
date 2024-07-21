@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 
-    <t t-name="awesome_owl.playground">
-        <div class="p-3">
-            hello world
-        </div>
-    </t>
+  <t t-name="awesome_owl.playground">
+    <div class="d-flex mt-3 justify-content-center align-items-center">
+      <div class="px-3 py-2 border d-inline-flex flex-column align-items-center">
+        <!--<div class="d-inline-flex">-->
+          <!--<Counter onChange.bind="incrementSum" />-->
+          <!--<Counter onChange.bind="incrementSum" />-->
+        <!--</div>-->
+        <!--<span class="my-1" >The sum is: <t t-esc="state.sum"/></span>-->
+        <Card>
+          <t t-set-slot="title">
+            <span>Card 1</span>
+          </t>
+          <Counter onChange.bind="incrementSum" />
+        </Card>
+        <TodoList />
+      </div>
+    </div>
+  </t>
 
 </templates>
