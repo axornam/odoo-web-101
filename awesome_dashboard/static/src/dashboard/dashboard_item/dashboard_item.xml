@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+  <t t-name="awesome_dashboard.DashboardItem">
+  <div class="card m-2 p-2" t-att-style="isSmall ? 'width: 100%;' : 'width: ' + (18 * props.size) + 'rem;'">
+  <!--<div class="card m-2 p-2" t-attf-style="width: {{isSmall ? 100% : 18*props.sizerem}};">-->
+      <t t-slot="default" t-props="props.itemProp"></t>
+    </div>
+  </t>
+
+</templates>

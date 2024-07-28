@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+  <t t-name="awesome_dashboard.AwesomeDashboard">
+    <Layout display="layoutConfig.display" className="'o_dashboard h-100'">
+      <t t-set-slot="layout-buttons" >
+        <button class="btn btn-primary" t-on-click="openCustomers">Customers</button>
+        <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#configModal">Dashboard Config <i class="fa fa-gear"></i></button>
+      </t> 
+
+      <div class="d-flex flex-wrap overflow-y-scroll">
+        <t t-foreach="items" t-as="item" t-key="item.id">
+          <DashboardItem t-if="_isShown(item.id)" size="item.size || 1">
+            <!--variable setting with qweb -->
+            <t t-set="itemProp" t-value="item.props ? item.props(statistics) : {'data': statistics}"/>
+              <!--using dynamic components with set variable as props-->
+            <t t-component="item.Component" t-props="itemProp" />
+          </DashboardItem>
+        </t>
+      </div>
+
+      <div class="modal fade" id="configModal" t-ref="configModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Dashboard Configuration Items</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <t t-foreach="items" t-as="item" t-key="item_index">
+                <div class="">
+                  <input t-att-name="item.id" type="checkbox" t-att-checked="_isShown(item.id)" class="checkbox me-1" t-on-input="_onInput" />
+                  <t t-esc="item.description" />
+                </div>
+              </t>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" t-on-click="saveDashboardConfig">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </Layout>
+  </t>
+
+</templates>
